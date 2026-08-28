@@ -1,0 +1,166 @@
+/* ==========================================================================
+   MEMORY MATCH - THEMES & PALETTES
+   ========================================================================== */
+
+/* Default Theme: Cyberpunk Neon */
+:root, [data-theme="cyberpunk"] {
+    --bg-primary: #0a0a16;
+    --bg-secondary: #12122b;
+    --bg-card-back: linear-gradient(135deg, #1f1b4d 0%, #301934 100%);
+    --bg-card-front: #161630;
+    --text-main: #00f0ff;
+    --text-muted: #7075a0;
+    --accent-glow: #ff007f;
+    --accent-secondary: #00f0ff;
+    --accent-gold: #ffe600;
+    --card-border: rgba(0, 240, 255, 0.3);
+    --card-border-active: #ff007f;
+    --card-glow: 0 0 15px rgba(0, 240, 255, 0.4);
+    --matched-glow: 0 0 20px rgba(0, 255, 128, 0.7);
+    --panel-bg: rgba(18, 18, 43, 0.75);
+    --panel-border: rgba(0, 240, 255, 0.2);
+    --particle-colors: #00f0ff, #ff007f, #ffe600, #00ff80, #9d00ff;
+    --font-heading: 'Orbitron', 'Rajdhani', system-ui, sans-serif;
+    --font-body: 'Outfit', 'Inter', system-ui, sans-serif;
+    --box-shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Theme: Retro Synthwave 80s */
+[data-theme="synthwave"] {
+    --bg-primary: #1a0826;
+    --bg-secondary: #2c0e3e;
+    --bg-card-back: linear-gradient(135deg, #491059 0%, #891667 100%);
+    --bg-card-front: #230b33;
+    --text-main: #ff71ce;
+    --text-muted: #b967bc;
+    --accent-glow: #01cdfe;
+    --accent-secondary: #05ffa1;
+    --accent-gold: #fffb96;
+    --card-border: rgba(255, 113, 206, 0.4);
+    --card-border-active: #01cdfe;
+    --card-glow: 0 0 15px rgba(255, 113, 206, 0.5);
+    --matched-glow: 0 0 20px rgba(5, 255, 161, 0.8);
+    --panel-bg: rgba(44, 14, 62, 0.8);
+    --panel-border: rgba(255, 113, 206, 0.25);
+    --particle-colors: #ff71ce, #01cdfe, #05ffa1, #fffb96, #b967bc;
+}
+
+/* Theme: Fantasy Realm */
+[data-theme="fantasy"] {
+    --bg-primary: #0f1715;
+    --bg-secondary: #1a2926;
+    --bg-card-back: linear-gradient(135deg, #1c3b36 0%, #0d211d 100%);
+    --bg-card-front: #142320;
+    --text-main: #e2c07d;
+    --text-muted: #748c87;
+    --accent-glow: #d4af37;
+    --accent-secondary: #52b788;
+    --accent-gold: #f4d35e;
+    --card-border: rgba(226, 192, 125, 0.35);
+    --card-border-active: #f4d35e;
+    --card-glow: 0 0 15px rgba(212, 175, 55, 0.4);
+    --matched-glow: 0 0 20px rgba(82, 183, 136, 0.8);
+    --panel-bg: rgba(26, 41, 38, 0.82);
+    --panel-border: rgba(226, 192, 125, 0.2);
+    --particle-colors: #e2c07d, #52b788, #f4d35e, #74c69d, #b7e4c7;
+}
+
+/* Theme: Minimal Dark */
+[data-theme="minimal"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-card-back: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    --bg-card-front: #252525;
+    --text-main: #f0f0f0;
+    --text-muted: #888888;
+    --accent-glow: #ffffff;
+    --accent-secondary: #3b82f6;
+    --accent-gold: #fbbf24;
+    --card-border: rgba(255, 255, 255, 0.15);
+    --card-border-active: #3b82f6;
+    --card-glow: 0 0 12px rgba(255, 255, 255, 0.25);
+    --matched-glow: 0 0 18px rgba(59, 130, 246, 0.7);
+    --panel-bg: rgba(30, 30, 30, 0.85);
+    --panel-border: rgba(255, 255, 255, 0.1);
+    --particle-colors: #ffffff, #3b82f6, #60a5fa, #fbbf24, #a7f3d0;
+}
+
+/* Theme: Deep Space */
+[data-theme="space"] {
+    --bg-primary: #040817;
+    --bg-secondary: #0b132b;
+    --bg-card-back: linear-gradient(135deg, #1c2541 0%, #0b132b 100%);
+    --bg-card-front: #131c38;
+    --text-main: #e0e1dd;
+    --text-muted: #6fffe9;
+    --accent-glow: #5bc0be;
+    --accent-secondary: #48cae4;
+    --accent-gold: #ffb703;
+    --card-border: rgba(91, 192, 190, 0.35);
+    --card-border-active: #6fffe9;
+    --card-glow: 0 0 15px rgba(111, 255, 233, 0.4);
+    --matched-glow: 0 0 20px rgba(72, 202, 228, 0.8);
+    --panel-bg: rgba(11, 19, 43, 0.85);
+    --panel-border: rgba(91, 192, 190, 0.2);
+    --particle-colors: #6fffe9, #5bc0be, #48cae4, #ffb703, #e0e1dd;
+}
+
+/* Theme: Nature Zen */
+[data-theme="zen"] {
+    --bg-primary: #1b261d;
+    --bg-secondary: #2d3a2e;
+    --bg-card-back: linear-gradient(135deg, #3a4a3c 0%, #223023 100%);
+    --bg-card-front: #253326;
+    --text-main: #d8f3dc;
+    --text-muted: #95d5b2;
+    --accent-glow: #74c69d;
+    --accent-secondary: #52b788;
+    --accent-gold: #e9c46a;
+    --card-border: rgba(149, 213, 178, 0.3);
+    --card-border-active: #74c69d;
+    --card-glow: 0 0 15px rgba(116, 198, 157, 0.4);
+    --matched-glow: 0 0 20px rgba(149, 213, 178, 0.8);
+    --panel-bg: rgba(45, 58, 46, 0.82);
+    --panel-border: rgba(149, 213, 178, 0.2);
+    --particle-colors: #d8f3dc, #b7e4c7, #95d5b2, #74c69d, #e9c46a;
+}
+
+/* Theme: Candy World */
+[data-theme="candy"] {
+    --bg-primary: #2a1128;
+    --bg-secondary: #3f1638;
+    --bg-card-back: linear-gradient(135deg, #531b47 0%, #3f1638 100%);
+    --bg-card-front: #351330;
+    --text-main: #ffc4d6;
+    --text-muted: #ff85a1;
+    --accent-glow: #ff3366;
+    --accent-secondary: #ff99c8;
+    --accent-gold: #fcf6bd;
+    --card-border: rgba(255, 153, 200, 0.4);
+    --card-border-active: #ff3366;
+    --card-glow: 0 0 15px rgba(255, 51, 102, 0.5);
+    --matched-glow: 0 0 20px rgba(255, 153, 200, 0.85);
+    --panel-bg: rgba(63, 22, 56, 0.82);
+    --panel-border: rgba(255, 153, 200, 0.25);
+    --particle-colors: #ffc4d6, #ff85a1, #ff3366, #ff99c8, #fcf6bd;
+}
+
+/* Theme: High Contrast Accessibility */
+[data-theme="high-contrast"] {
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --bg-card-back: #000000;
+    --bg-card-front: #ffffff;
+    --text-main: #ffff00;
+    --text-muted: #ffffff;
+    --accent-glow: #ffff00;
+    --accent-secondary: #00ffff;
+    --accent-gold: #ffff00;
+    --card-border: #ffffff;
+    --card-border-active: #ffff00;
+    --card-glow: 0 0 0 4px #ffff00;
+    --matched-glow: 0 0 0 4px #00ff00;
+    --panel-bg: #111111;
+    --panel-border: #ffffff;
+    --particle-colors: #ffff00, #00ffff, #00ff00, #ffffff;
+}
