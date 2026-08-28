@@ -2,9 +2,9 @@
   "name": "memory-match-pro",
   "version": "1.0.0",
   "description": "Ultra Feature-Rich Memory Match Game Application with AI, Synth Audio, and Campaign Mode",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "node --test tests/*.test.js",
     "build": "echo 'Build successful'"
   },
