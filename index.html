@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ultra Feature-Rich Memory Match Game - Flip cards, match identical pairs, unlock achievements, play against AI, and master quest campaign levels!">
+    <title>Memory Match - Ultimate Card Matching Game</title>
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- HTML5 Canvas Effect Layer -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Main Application Container -->
+    <div class="app-container">
+        
+        <!-- Header Navbar -->
+        <header class="app-header">
+            <div class="brand-title">
+                <svg class="brand-logo-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>MEMORY MATCH</span>
+            </div>
+
+            <div class="header-controls">
+                <button class="btn btn-icon" id="muteBtn" aria-label="Toggle Sound" title="Toggle Sound">🔊</button>
+                <button class="btn" id="openStatsBtn" aria-label="Statistics">📊 Stats</button>
+                <button class="btn" id="openAchievementsBtn" aria-label="Achievements">🏆 Badges</button>
+                <button class="btn" id="openSettingsBtn" aria-label="Settings">⚙️ Options</button>
+                <button class="btn" id="openHelpBtn" aria-label="How to Play">❓ Help</button>
+            </div>
+        </header>
+
+        <!-- Mode & Grid Selectors Toolbar -->
+        <div class="stats-bar" style="margin-bottom: 12px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="stat-label" style="align-self: center; margin-right: 6px;">Grid:</span>
+                <button class="btn" data-grid-size="2x2">2x2</button>
+                <button class="btn btn-primary" data-grid-size="4x4">4x4</button>
+                <button class="btn" data-grid-size="6x6">6x6</button>
+                <button class="btn" data-grid-size="8x8">8x8</button>
+                <button class="btn" data-grid-size="10x10">10x10</button>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="stat-label" style="align-self: center; margin-right: 6px;">Mode:</span>
+                <button class="btn btn-primary" data-mode="classic">Classic</button>
+                <button class="btn" data-mode="triple">Triple</button>
+                <button class="btn" data-mode="time_attack">Time Attack</button>
+                <button class="btn" data-mode="quest">Quest</button>
+                <button class="btn" data-mode="vs_ai">Vs AI</button>
+                <button class="btn" data-mode="zen">Zen</button>
+            </div>
+
+            <button class="btn btn-primary" id="restartBtn">🔄 New Game</button>
+        </div>
+
+        <!-- Live Game Stats Display -->
+        <div class="stats-bar">
+            <div class="stat-box">
+                <span class="stat-label">Score</span>
+                <span class="stat-value" id="statScore">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Time</span>
+                <span class="stat-value" id="statTimer">0:00</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Flips</span>
+                <span class="stat-value" id="statFlips">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Matches</span>
+                <span class="stat-value" id="statMatches">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Combo</span>
+                <span class="stat-value" id="statCombo">1x</span>
+            </div>
+        </div>
+
+        <!-- Power-Ups Bar -->
+        <div class="powerup-toolbar">
+            <button class="powerup-btn" id="powerup_peek" title="X-Ray Peek: Briefly reveal all cards">
+                <span>👁️ Peek</span>
+                <span class="powerup-badge" id="powerup_count_peek">2</span>
+            </button>
+            <button class="powerup-btn" id="powerup_freeze" title="Freeze: Pause timer for 10s">
+                <span>⏰ Freeze</span>
+                <span class="powerup-badge" id="powerup_count_freeze">2</span>
+            </button>
+            <button class="powerup-btn" id="powerup_shuffle" title="Shuffle: Rearrange unmatched cards">
+                <span>🔀 Shuffle</span>
+                <span class="powerup-badge" id="powerup_count_shuffle">2</span>
+            </button>
+            <button class="powerup-btn" id="powerup_magnet" title="Magnet: Highlight matching pair">
+                <span>🧲 Magnet</span>
+                <span class="powerup-badge" id="powerup_count_magnet">1</span>
+            </button>
+        </div>
+
+        <!-- Main Interactive Game Grid Area -->
+        <main class="main-game-area">
+            <div id="gameGrid" class="game-grid-container grid-4x4" role="region" aria-label="Card Match Grid"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Memory Match &copy; 2026. Built with Vanilla HTML5, CSS3, & Modern JavaScript (Web Audio API & Canvas).</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification Overlay Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- MODAL DIALOGS -->
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">⚙️ Game Options & Settings</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Visual Theme</div>
+                    <div class="setting-desc">Select color palette & ambient style</div>
+                </div>
+                <select id="themeSelect" class="select-input">
+                    <option value="cyberpunk">Cyberpunk Neon</option>
+                    <option value="synthwave">Retro Synthwave 80s</option>
+                    <option value="fantasy">RPG Fantasy Realm</option>
+                    <option value="minimal">Minimal Dark</option>
+                    <option value="space">Deep Space</option>
+                    <option value="zen">Nature Zen</option>
+                    <option value="candy">Candy World</option>
+                    <option value="high-contrast">High Contrast Accessibility</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Card Deck Dataset</div>
+                    <div class="setting-desc">Choose SVG card graphic category</div>
+                </div>
+                <select id="deckSelect" class="select-input">
+                    <option value="tech">Technology & Cyber</option>
+                    <option value="nature">Nature & Wildlife</option>
+                    <option value="fantasy">RPG Fantasy Quest</option>
+                    <option value="food">Food & Sweets</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Sound Effects Volume</div>
+                </div>
+                <input type="range" id="fxVolSlider" class="range-input" min="0" max="1" step="0.05" value="0.5">
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Ambient Music Volume</div>
+                </div>
+                <input type="range" id="musicVolSlider" class="range-input" min="0" max="1" step="0.05" value="0.3">
+            </div>
+            <div class="setting-row">
+                <div>
+                    <div class="setting-label">Data Backup</div>
+                    <div class="setting-desc">Export or import JSON save file</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" id="exportSaveBtn">💾 Export</button>
+                    <label class="btn" style="cursor: pointer;">
+                        📥 Import
+                        <input type="file" id="importSaveInput" accept=".json" style="display: none;">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal-overlay" id="helpModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">❓ How to Play Memory Match</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div style="text-align: left; line-height: 1.6; font-size: 0.95rem;">
+                <p><strong>Goal:</strong> Flip cards to reveal hidden SVG icons and match identical pairs to clear the board!</p>
+                <br>
+                <p><strong>Controls:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Mouse / Touch:</strong> Click or tap any card to flip it over.</li>
+                    <li><strong>Keyboard:</strong> Use <strong>Arrow Keys</strong> to move focus across the card grid, and press <strong>Enter</strong> or <strong>Spacebar</strong> to flip.</li>
+                </ul>
+                <br>
+                <p><strong>Game Modes:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Classic:</strong> Standard 2-card matching.</li>
+                    <li><strong>Triple:</strong> Challenge yourself by matching 3 identical cards per set!</li>
+                    <li><strong>Time Attack:</strong> Race against a ticking countdown clock.</li>
+                    <li><strong>Quest:</strong> Complete progressive campaign levels with star targets.</li>
+                    <li><strong>Vs AI:</strong> Compete against an adaptive AI opponent.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div class="modal-overlay" id="statsModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">📊 Career Statistics</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div id="statsModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Achievements Modal -->
+    <div class="modal-overlay" id="achievementsModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">🏆 Achievements & XP Progression</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div id="achievementsModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Victory Win Modal -->
+    <div class="modal-overlay" id="winModal">
+        <div class="modal-card" style="text-align: center;">
+            <div id="winModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Extended Dataset Modules -->
+    <script src="js/data/flags_dataset.js"></script>
+    <script src="js/data/word_pairs.js"></script>
+    <script src="js/data/campaign_levels_extended.js"></script>
+    <script src="js/data/audio_synthesis_maps.js"></script>
+    <script src="js/data/extended_svg_icons.js"></script>
+
+    <!-- JavaScript Core Modules (Loaded in dependency order) -->
+    <script src="js/audio.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/decks.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/powerups.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/modes.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
