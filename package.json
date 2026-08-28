@@ -1,0 +1,22 @@
+{
+  "name": "memory-match-pro",
+  "version": "1.0.0",
+  "description": "Ultra Feature-Rich Memory Match Game Application with AI, Synth Audio, and Campaign Mode",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js",
+    "build": "echo 'Build successful'"
+  },
+  "keywords": [
+    "memory",
+    "match",
+    "game",
+    "javascript",
+    "canvas",
+    "web-audio"
+  ],
+  "author": "Srinivas",
+  "license": "UNLICENSED",
+  "private": true
+}
